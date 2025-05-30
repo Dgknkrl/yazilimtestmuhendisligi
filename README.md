@@ -1,53 +1,47 @@
-API Test Projesi
+# API Test Projesi
 
-Bu proje, Rest-Assured ve TestNG kullanarak JSONPlaceholder API’sine yönelik temel GET ve POST testlerini içerir.
+Bu proje, **Rest-Assured** ve **TestNG** kullanarak JSONPlaceholder API’sine yönelik temel **GET** ve **POST** testlerini içerir.
 
-Özellikler
+## Özellikler
 
-testGetRequest(): Tek bir post kaydını (/posts/1) GET metodu ile çeker ve:
+* **testGetRequest()**: Tek bir post kaydını (`/posts/1`) GET metodu ile çeker ve:
 
-HTTP 200 kodunu doğrular
+  * HTTP `200` kodunu doğrular
+  * `userId` ve `id` değerlerini kontrol eder
+  * Yanıt süresinin 1500 ms’den kısa olduğunu test eder
+  * Konsola URL, status code, yanıt gövdesi ve süresi yazar
 
-userId ve id değerlerini kontrol eder
+* **testPostRequest()**: Yeni bir post oluşturmak için `/posts` endpoint’ine POST isteği yapar ve:
 
-Yanıt süresinin 1500 ms’den kısa olduğunu test eder
+  * HTTP `201` kodunu doğrular
+  * Gönderilen JSON içeriğinin doğru şekilde döndüğünü kontrol eder (`title`, `userId`)
+  * Yanıt süresinin 1500 ms’den kısa olduğunu test eder
+  * Konsola URL, gönderilen veri, status code, yanıt gövdesi ve süresi yazar
 
-Konsola URL, status code, yanıt gövdesi ve süresi yazar
+* **testGetAllPosts()**: Tüm post listesini (`/posts`) GET metodu ile çeker ve:
 
-testPostRequest(): Yeni bir post oluşturmak için /posts endpoint’ine POST isteği yapar ve:
+  * HTTP `200` kodunu doğrular
+  * Dönen listenin boş olmadığını kontrol eder
+  * Yanıt süresinin 3000 ms’den kısa olduğunu test eder
+  * Konsola URL, status code, toplam post sayısı, ilk post başlığı ve süresini yazar
 
-HTTP 201 kodunu doğrular
+## Kurulum ve Çalıştırma
 
-Gönderilen JSON içeriğinin doğru şekilde döndüğünü kontrol eder (title, userId)
+1. Java 11 veya üzeri kurulu olmalıdır.
+2. Maven ile bağımlılıkları indirin:
 
-Yanıt süresinin 1500 ms’den kısa olduğunu test eder
+   ```bash
+   mvn clean install
+   ```
+3. Testleri çalıştırmak için:
 
-Konsola URL, gönderilen veri, status code, yanıt gövdesi ve süresi yazar
+   ```bash
+   mvn test
+   ```
 
-testGetAllPosts(): Tüm post listesini (/posts) GET metodu ile çeker ve:
+## Proje Yapısı
 
-HTTP 200 kodunu doğrular
-
-Dönen listenin boş olmadığını kontrol eder
-
-Yanıt süresinin 3000 ms’den kısa olduğunu test eder
-
-Konsola URL, status code, toplam post sayısı, ilk post başlığı ve süresini yazar
-
-Kurulum ve Çalıştırma
-
-Java 11 veya üzeri kurulu olmalıdır.
-
-Maven ile bağımlılıkları indirin:
-
-mvn clean install
-
-Testleri çalıştırmak için:
-
-mvn test
-
-Proje Yapısı
-
+```
 api-test/
 ├─ pom.xml             # Maven yapılandırması
 ├─ src/
@@ -56,11 +50,14 @@ api-test/
 │     └─ java/
 │        └─ ApiTest.java
 └─ testng.xml          # TestNG suite dosyası
+```
 
-Bağımlılıklar
+## Bağımlılıklar
 
-Rest-Assured 5.3.0
+* **Rest-Assured** 5.3.0
+* **TestNG** 7.8.0
+* **Jackson Databind** 2.15.2
 
-TestNG 7.8.0
+---
 
-Jackson Databind 2.15.2
+Detaylı API testi veya performans ölçümü için bu yapı örnek teşkil eder ve kolayca genişletilebilir.
